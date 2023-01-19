@@ -67,11 +67,9 @@ class Stations:
         if url is None:
             return
         issues = self.get_station_info(station_name, url)
-        print(f"url: {url}, issues: {issues}")
         return issues
 
     def print_message(self, interested_stations):
-        print(f"interested_stops: {interested_stations}")
         issues = [
             self.get_current_update(self.clean_name(station))
             for station in interested_stations

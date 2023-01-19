@@ -10,11 +10,10 @@ from telebot import types
 from apscheduler.schedulers.background import BackgroundScheduler
 from telebot.apihelper import ApiTelegramException
 
-
 # ------------- Local methods ---------------------
 
+
 def print_message(user_id, interested_stations):
-    print(f"interested_stops: {interested_stations}")
     issues = [
         stations.get_current_update(stations.clean_name(station))
         for station in interested_stations
@@ -31,7 +30,6 @@ def print_message(user_id, interested_stations):
 
 def broadcast():
     scheduled_users = db.get_all_scheduled_users()
-    print(f"scheduled_users: {scheduled_users}")
     for user in scheduled_users:
         try:
             bot.send_message(chat_id=user,
@@ -56,9 +54,10 @@ if __name__ == "__main__":
          f"Schedule a daily update at 8AM (E.g. /schedule temple)"),
         ("delete", f"Remove existing update schedule"),
     ]
-
+    print(f"The bot has started.")
 
 # ------------ Bot commands -----------------------
+
 
 @bot.message_handler(commands=["start", "help"])
 def start(message):
@@ -75,7 +74,6 @@ def start(message):
 @bot.message_handler(commands=["get"])
 def get(message):
     requested_stations = message.text.split("/get ")[1:][0].split(",")
-    print(f"get stations: {requested_stations}")
     msg = stations.print_message(requested_stations)
 
     if not db.check_exisiting_user(message):
@@ -101,7 +99,7 @@ def schedule_msg(message):
     bot.reply_to(
         message,
         text=
-        f"You have successfully subscribed the updates of the following station(s): {', '.join([x.title() for x in requested_stations])}. The update schedule is set to 8AM every morning. You are delete the schedule by typing /delete."
+        f"You have successfully subscribed the updates of the following station(s): {', '.join([x.title() for x in requested_stations])}. The update schedule is set to 8AM every morning. You can delete the schedule by typing /delete."
     )
 
     # Check if user has registered in schedule collection
