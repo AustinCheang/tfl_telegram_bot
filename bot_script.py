@@ -79,6 +79,8 @@ def get(message):
     if not db.check_exisiting_user(message):
         db.register_user(message)
 
+    print(f"User {message.from_user.first_name} gets {requested_stations}")
+
     bot.reply_to(message, msg)
 
 
@@ -95,6 +97,10 @@ def schedule_msg(message):
         station = station.replace(" ", "-")
         if station not in stations.stations_dict.keys():
             bot.reply_to(message, "Please provide valid station name(s).")
+
+    print(
+        f"User: {message.from_user.first_name} scheduled stations: {requested_stations}"
+    )
 
     bot.reply_to(
         message,
@@ -117,6 +123,7 @@ def delete_schedule(message):
             text="Please set schedule using /schedule before delete a schedule"
         )
     else:
+        print(f"User {message.from_user.first_name} deleted schedule.")
         db.delete_schedule(message)
         bot.reply_to(
             message,
