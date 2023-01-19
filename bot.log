@@ -1,0 +1,6 @@
+2023-01-19 15:24:18,618:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-01-19 15:24:18,619:Added job "broadcast" to job store "default"
+2023-01-19 15:24:18,619:Scheduler started
+2023-01-19 15:24:27,512:User Austin gets ['aldgate east']
+2023-01-19 15:24:43,638:Received schedule message from: Austin
+2023-01-19 15:24:43,639:User: Austin scheduled stations: ['temple', 'euston']

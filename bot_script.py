@@ -1,16 +1,21 @@
-from datetime import datetime
-from dotenv import load_dotenv
+import logging
 import os
-from station import *
-import telebot
+from datetime import datetime
 
-from station import *
-from db import *
-from telebot import types
+import telebot
 from apscheduler.schedulers.background import BackgroundScheduler
+from dotenv import load_dotenv
+from telebot import types
 from telebot.apihelper import ApiTelegramException
 
+from db import *
+from station import *
+
 # ------------- Local methods ---------------------
+
+
+def clean_input(user_input):
+    return [x.strip() for x in user_input.split(f" ", 1)[1].split(",")]
 
 
 def print_message(user_id, interested_stations):
@@ -44,6 +49,10 @@ if __name__ == "__main__":
     load_dotenv()
     API_TOKEN = os.getenv("BOT_TOKEN")
     bot = telebot.TeleBot(API_TOKEN)
+
+    logging.basicConfig(filename='bot.log',
+                        level=logging.INFO,
+                        format='%(asctime)s:%(message)s')
     stations = Stations()
     db = Mongodb()
     bot_user_collection = db.bot_user_collection
@@ -73,21 +82,24 @@ def start(message):
 
 @bot.message_handler(commands=["get"])
 def get(message):
-    requested_stations = message.text.split("/get ")[1:][0].split(",")
+    requested_stations = clean_input(message.text)
     msg = stations.print_message(requested_stations)
 
     if not db.check_exisiting_user(message):
         db.register_user(message)
 
-    print(f"User {message.from_user.first_name} gets {requested_stations}")
+    logging.info("User {} gets {}".format(message.from_user.first_name,
+                                          requested_stations))
 
     bot.reply_to(message, msg)
 
 
 @bot.message_handler(commands=["schedule"])
 def schedule_msg(message):
+    logging.info("Received schedule message from: {}".format(
+        message.from_user.first_name))
     # Get the information from the schedule input
-    requested_stations = message.text.split("/schedule ")[1:][0].split(",")
+    requested_stations = clean_input(message.text)
     # print(f"requested_stations: {requested_stations}")
 
     # Check if a valid station
@@ -98,9 +110,8 @@ def schedule_msg(message):
         if station not in stations.stations_dict.keys():
             bot.reply_to(message, "Please provide valid station name(s).")
 
-    print(
-        f"User: {message.from_user.first_name} scheduled stations: {requested_stations}"
-    )
+    logging.info("User: {} scheduled stations: {}".format(
+        message.from_user.first_name, requested_stations))
 
     bot.reply_to(
         message,
@@ -123,7 +134,8 @@ def delete_schedule(message):
             text="Please set schedule using /schedule before delete a schedule"
         )
     else:
-        print(f"User {message.from_user.first_name} deleted schedule.")
+        logging.info("User {} deleted schedule.".format(
+            message.from_user.first_name))
         db.delete_schedule(message)
         bot.reply_to(
             message,
