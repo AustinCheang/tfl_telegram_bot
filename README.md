@@ -15,7 +15,7 @@ Step 2: Click `START` to start interacting with the bot.
 Step 3: The bot first displays all the existing commands:
 
 1.  `/get` - Get the station(s) information
-2.  `schedule` - Schedule a daily update at 8AM
+2.  `/schedule` - Schedule a daily update at 8AM
 3.  `/delete` - Remove existing update schedule
 
 Users can always check all the commands by typing `/start` and `/help`.
