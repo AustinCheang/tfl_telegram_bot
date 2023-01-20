@@ -10,7 +10,7 @@ Step 1: Download Telegram and register an account. Go to search box and search `
 
 Step 2: Click `START` to start interacting with the bot.
 
-![](./images/Screenshot 2023-01-19 at 03.02.00.png)
+![](./images/Screenshot%202023-01-19%20at%2003.02.00.png)
 
 Step 3: The bot first displays all the existing commands:
 
@@ -20,21 +20,21 @@ Step 3: The bot first displays all the existing commands:
 
 Users can always check all the commands by typing `/start` and `/help`.
 
-![Screenshot 2023-01-19 at 03.07.16](./images/Screenshot 2023-01-19 at 03.07.16.png)
+![Screenshot 2023-01-19 at 03.07.16](./images/Screenshot%202023-01-19%20at%2003.07.16.png)
 
 ## Example
 
 1.  The `/get` command allows users to retrieve current reported issues for specific London Tube stations of their choice. Users can input one or multiple stations at a time, for example by typing "/get Temple, Euston" and the station names are not case-sensitive.
 
-![Screenshot 2023-01-19 at 03.08.56](./images/Screenshot 2023-01-19 at 03.08.56.png)
+![Screenshot 2023-01-19 at 03.08.56](./images/Screenshot%202023-01-19%20at%2003.08.56.png)
 
 2.  The `/schedule` command enables users to set up daily reminders for specific London Tube stations they want to monitor. The reminder is sent every morning at 8AM. Users can set reminders for multiple stations by typing "/schedule Temple, Euston" in the chat.
 
-![Screenshot 2023-01-20 at 11.50.08](./images/Screenshot 2023-01-20 at 11.50.08.png)
+![Screenshot 2023-01-20 at 11.50.08](./images/Screenshot%202023-01-20%20at%2011.50.08.png)
 
 3.  The `/delete` command enables the users to cancel any previously established schedule, thus stopping them from receiving further updates for the respective tube stations.
 
-![Screenshot 2023-01-19 at 14.17.17](./images/Screenshot 2023-01-19 at 14.17.17.png)
+![Screenshot 2023-01-19 at 14.17.17](./images/Screenshot%202023-01-19%20at%2014.17.17.png)
 
 ## Future updates
 
