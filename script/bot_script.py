@@ -15,7 +15,10 @@ from station import *
 
 
 def clean_input(user_input):
-    return [x.strip() for x in user_input.split(f" ", 1)[1].split(",")]
+    return [
+        x.strip().lower().replace(" ", "-")
+        for x in user_input.split(f" ", 1)[1].split(",")
+    ]
 
 
 def print_message(user_id, interested_stations):
@@ -106,9 +109,9 @@ def schedule_msg(message):
     for station in requested_stations:
         if station.startswith(" "):
             station = station[1:]
-        station = station.replace(" ", "-")
         if station not in stations.stations_dict.keys():
             bot.reply_to(message, "Please provide valid station name(s).")
+            return
 
     logging.info("User: {} scheduled stations: {}".format(
         message.from_user.first_name, requested_stations))

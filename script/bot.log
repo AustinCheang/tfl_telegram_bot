@@ -1,0 +1,4 @@
+2023-01-20 12:59:36,702:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-01-20 12:59:36,703:Added job "broadcast" to job store "default"
+2023-01-20 12:59:36,703:Scheduler started
+2023-01-20 12:59:49,952:User Austin gets ['temple']

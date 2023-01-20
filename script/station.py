@@ -7,7 +7,7 @@ from datetime import datetime
 class Stations:
 
     def __init__(self):
-        self.stations_df = pd.read_csv("data/Stations.csv")
+        self.stations_df = pd.read_csv("../data/Stations.csv")
         self.base_url = f"https://tfl.gov.uk/hub/stop/"
         self.end_url = f"-underground-station/"
         self.stations_dict = self.get_stations_dict()
